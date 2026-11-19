@@ -2,12 +2,18 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
 export const apiInterceptor: HttpInterceptorFn = (req, next) => {
-  // لو المسار بيبدأ بـ /api، نضيف رابط السيرفر
+  const apiUrl = environment.apiUrl.replace(/\/+$/, '');
+  const localApiUrl = 'http://localhost:5124';
+
+  // Prefix relative API paths with the environment-specific API host.
   if (req.url.startsWith('/api')) {
-    const apiReq = req.clone({
-      url: `${environment.apiUrl}${req.url}`
-    });
-    return next(apiReq);
+    return next(req.clone({ url: `${apiUrl}${req.url}` }));
   }
+
+  // Rewrite legacy hard-coded local API URLs to the configured API host.
+  if (req.url.includes(localApiUrl)) {
+    return next(req.clone({ url: req.url.replace(localApiUrl, apiUrl) }));
+  }
+
   return next(req);
 };
