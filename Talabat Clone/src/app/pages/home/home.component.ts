@@ -10,6 +10,7 @@ import { ToastService } from '../../core/toast.service';
 import { WishlistService } from '../../core/wishlist.service';
 import { PasswordRequirementsComponent } from '../auth/password-requirements.component';
 import { ProductCardComponent } from '../../shared/product-card.component';
+import { environment } from '../../../environments/environment';
 
 interface CategoryCard extends CategoryDto { icon: LucideIcon; tone: string; }
 interface HeroSlide { first: string; second: string; description: string; action: string; route: string; image: string; fragment?: string; }
@@ -19,6 +20,7 @@ interface HeroSlide { first: string; second: string; description: string; action
   templateUrl: './home.component.html', styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnDestroy {
+  readonly apiUrl = environment.apiUrl;
   readonly cart = inject(CartService);
   readonly wishlist = inject(WishlistService);
   readonly auth = inject(AuthService);

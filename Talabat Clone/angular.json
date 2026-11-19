@@ -36,7 +36,7 @@
           },
           "defaultConfiguration": "production"
         },
-        "serve": { "builder": "@angular/build:dev-server", "options": { "proxyConfig": "proxy.conf.json" }, "configurations": { "production": { "buildTarget": "nearby-market:build:production" }, "development": { "buildTarget": "nearby-market:build:development" } }, "defaultConfiguration": "development" }
+        "serve": { "builder": "@angular/build:dev-server", "configurations": { "production": { "buildTarget": "nearby-market:build:production" }, "development": { "buildTarget": "nearby-market:build:development" } }, "defaultConfiguration": "development" }
       }
     }
   }
