@@ -1,0 +1,15 @@
+# .NET Backend
+bin/
+obj/
+.vs/
+logs/
+appsettings.Development.json
+appsettings.Production.json
+*.user
+*.suo
+
+# Angular Frontend
+node_modules/
+dist/
+.angular/
+.envBackend/E-Commerce_SecretKey.txt
