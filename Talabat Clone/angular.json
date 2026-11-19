@@ -22,7 +22,17 @@
           },
           "configurations": {
             "production": { "optimization": { "fonts": { "inline": false } }, "budgets": [{ "type": "initial", "maximumWarning": "500kB", "maximumError": "1MB" }, { "type": "anyComponentStyle", "maximumWarning": "16kB", "maximumError": "18kB" }], "outputHashing": "all" },
-            "development": { "optimization": false, "extractLicenses": false, "sourceMap": true }
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
+            }
           },
           "defaultConfiguration": "production"
         },
