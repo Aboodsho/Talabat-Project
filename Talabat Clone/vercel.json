@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "http://talabat-405.runasp.net/api/:path*"
+      "destination": "https://talabat-405.runasp.net/api/:path*"
     },
     {
       "source": "/(.*)",
