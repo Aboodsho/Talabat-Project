@@ -48,6 +48,13 @@ export class HomeComponent implements OnDestroy {
   readonly passwordPattern = '(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,20}';
   readonly selectedCategoryId = signal<string | null>(null);
   readonly activeSlide = signal(0);
+  readonly aboutPaused = signal(false);
+  readonly activeAboutSlide = signal(0);
+  readonly aboutSlides = [
+    { number: '01', heading: 'A simpler way to discover what is available in your market.', detail: 'THOUGHTFULLY CHOSEN · EASY TO BROWSE', image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1000&q=85' },
+    { number: '02', heading: 'Everyday essentials and new finds, together in one place.', detail: 'EXPLORE THE MARKET · FIND YOUR NEXT PICK', image: 'https://images.unsplash.com/photo-1543168256-418811576931?auto=format&fit=crop&w=1000&q=85' },
+    { number: '03', heading: 'Keep your favourite products close as you build your basket.', detail: 'SAVE YOUR PICKS · SHOP WITH EASE', image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1000&q=85' }
+  ];
   readonly heroSlides: HeroSlide[] = [
     { first: 'Find your next', second: 'favourite thing.', description: 'Explore a thoughtfully chosen mix of everyday goods, from useful essentials to new discoveries.', action: 'EXPLORE THE MARKET', route: '/explore', image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=2200&q=85' },
     { first: 'Good finds,', second: 'just a click away.', description: 'Browse the catalog, compare your picks, and build a basket that feels like yours.', action: 'BROWSE PRODUCTS', route: '/explore', image: 'https://images.unsplash.com/photo-1543168256-418811576931?auto=format&fit=crop&w=2200&q=85' },
@@ -55,6 +62,9 @@ export class HomeComponent implements OnDestroy {
   ];
   private pageNumber = 1;
   private readonly sliderTimer = setInterval(() => this.nextSlide(), 5500);
+  private readonly aboutTimer = setInterval(() => {
+    if (!this.aboutPaused()) this.activeAboutSlide.update(index => (index + 1) % this.aboutSlides.length);
+  }, 3000);
   private readonly countTimers: ReturnType<typeof setInterval>[] = [];
 
   constructor() {
@@ -71,7 +81,7 @@ export class HomeComponent implements OnDestroy {
     this.animateCount(149, value => this.animatedOrderTotal.set(value));
   }
 
-  ngOnDestroy(): void { clearInterval(this.sliderTimer); this.countTimers.forEach(timer => clearInterval(timer)); }
+  ngOnDestroy(): void { clearInterval(this.sliderTimer); clearInterval(this.aboutTimer); this.countTimers.forEach(timer => clearInterval(timer)); }
   nextSlide(): void { this.activeSlide.update(index => (index + 1) % this.heroSlides.length); }
 
   loadCategories(): void {
