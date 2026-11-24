@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Core.Enums;
+using Microsoft.AspNetCore.Identity;
 
 namespace Infrastructure.Identity
 {
@@ -6,5 +7,7 @@ namespace Infrastructure.Identity
     {
         public string FullName { get; set; }
         public DateTime CreatedAt { get; set; }
+        public NotificationChannel NotificationChannel { get; set; } = NotificationChannel.None;
+
     }
 }

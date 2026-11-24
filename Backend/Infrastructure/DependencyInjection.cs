@@ -47,6 +47,9 @@ namespace Infrastructure
 
             services.AddScoped<IUserLookupService, UserLookupService>();
 
+            services.AddScoped<IProfileService, ProfileService>();
+
+
             services.Configure<FrontendSettings>(configuration.GetSection(FrontendSettings.SectionName));
 
             var emailProvider = configuration["Email:Provider"] ?? "Console";
